@@ -4,6 +4,9 @@ const nextConfig: NextConfig = {
     eslint: {
         dirs: ['pages', 'components', 'lib', 'src'], // Directories to lint
         ignoreDuringBuilds: false
+    },
+    experimental: {
+        reactCompiler: true
     }
 };
 

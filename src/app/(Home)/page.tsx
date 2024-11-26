@@ -1,6 +1,7 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import styles from './page.module.css';
+import Terminal from '@/components/Terminal';
 
 function Home() {
     const [text, setText] = useState('');
@@ -43,7 +44,7 @@ function Home() {
                 )}
             </div>
             <div className={`${styles.content} ${animationStage >= 2 && styles.showContent}`}>
-                <div>Home</div>
+                <Terminal />
             </div>
         </div>
     );
