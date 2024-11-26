@@ -26,7 +26,7 @@ function Terminal() {
 
     return (
         <div className="h-screen w-screen p-2 font-ibm-mono">
-            <div className="h-full w-full rounded-xl border-2 border-white p-8">
+            <div className="h-full w-full rounded-xl border-2 border-white p-8 overflow-y-auto">
                 <div className="flex flex-col">
                     <div className="mb-8 ml-2">
                         <pre>
@@ -52,7 +52,7 @@ ____/|__/  \\___//_/  \\___/ \\____//_/ /_/ /_/\\___/
                             </p>
                         </div>
                     </div>
-                    <div className="flex flex-col justify-start gap-2">
+                    <div className={`${prevQueries.length > 0 && "mt-2"} flex flex-col gap-2`}>
                         {prevQueries.map((query, index) => (
                             <div key={index}>
                                 <div className="flex flex-row space-x-2">
@@ -63,8 +63,8 @@ ____/|__/  \\___//_/  \\___/ \\____//_/ /_/ /_/\\___/
                             </div>
                         ))}
                     </div>
-                    <form onSubmit={handleCommand}>
-                        <div className="mt-2 flex flex-row space-x-2">
+                    <form onSubmit={handleCommand} className='mt-2'>
+                        <div className="flex flex-row space-x-2">
                             <Prompt />
                             <input
                                 type="text"
