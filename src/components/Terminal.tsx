@@ -1,6 +1,7 @@
 'use client';
 import query from '@/types/query';
 import Prompt from './Prompt';
+import useKeyboardShortcuts from '@/app/hooks/useKeyboardShortcuts';
 import { parser } from '@/utils/commandParser';
 import React, { useState } from 'react';
 
@@ -23,6 +24,17 @@ function Terminal() {
 
         setUserInput('');
     };
+
+    useKeyboardShortcuts((event: KeyboardEvent) => {
+        if(event.ctrlKey && event.key === 'l'){
+            setPrevQueries([]);
+            event.preventDefault();
+        } else if (event.key === 'Tab') {
+            // TODO: Get completions from commandParser api
+            setUserInput('help');
+            event.preventDefault();
+        }
+    });
 
     return (
         <div className="h-screen w-screen p-2 font-ibm-mono">
