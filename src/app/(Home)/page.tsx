@@ -5,7 +5,7 @@ import Terminal from '@/components/Terminal';
 
 function Home() {
     const [text, setText] = useState('');
-    const [animationStage, setAnimationStage] = useState(0);
+    const [animationStage, setAnimationStage] = useState(2);
     const [currentMessage, setCurrentMessage] = useState(0);
     const command = 'ssh nishant@127.0.0.1';
     const messages = ['Authenticating...', 'Access granted..', 'Initializing connection...'];
@@ -17,7 +17,7 @@ function Home() {
         } else if (animationStage === 0) {
             setTimeout(() => setAnimationStage(1), 500);
         }
-    }, [text]);
+    }, [text, animationStage]);
 
     useEffect(() => {
         if (animationStage === 1) {
@@ -31,7 +31,7 @@ function Home() {
     }, [animationStage]);
 
     return (
-        <div className="w-full h-[100vh] bg-[#181818] color-[#d4d4d4] flex justify-center items-center relative">
+        <div className="color-[#d4d4d4] relative flex h-[100vh] w-full items-center justify-center bg-[#181818]">
             <div className={`${styles.terminal} ${animationStage >= 2 && styles.fadeOut}`}>
                 <div className={styles.prompt}>
                     <span className={styles.dollarSign}>$ </span>
