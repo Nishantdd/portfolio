@@ -16,7 +16,7 @@ const geistMono = localFont({
 const ibmMono = IBM_Plex_Mono({
     variable: '--font-ibm-mono',
     weight: ['100', '200', '300', '400', '500']
-})
+});
 
 export const metadata: Metadata = {
     title: 'Create Next App',
@@ -31,8 +31,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body
-                className={`${geistSans.variable} ${geistMono.variable} ${ibmMono.variable} font-geist-sans antialiased`}
-            >
+                className={`${geistSans.variable} ${geistMono.variable} ${ibmMono.variable} font-geist-sans antialiased`}>
                 {children}
             </body>
         </html>
