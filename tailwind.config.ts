@@ -8,6 +8,11 @@ export default {
     ],
     theme: {
         extend: {
+            fontFamily: {
+                'ibm-mono': 'var(--font-ibm-mono)',
+                'geist-mono': 'var(--font-geist-mono)',
+                'gesit-sans': 'var(--font-gesit-sans)'
+            },
             colors: {
                 background: 'var(--background)',
                 foreground: 'var(--foreground)'
