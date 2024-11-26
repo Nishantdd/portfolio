@@ -66,13 +66,24 @@ ____/|__/  \\___//_/  \\___/ \\____//_/ /_/ /_/\\___/
                     <form onSubmit={handleCommand} className='mt-2'>
                         <div className="flex flex-row space-x-2">
                             <Prompt />
-                            <input
-                                type="text"
-                                value={userInput}
-                                onChange={e => setUserInput(e.target.value)}
-                                placeholder="Start typing a command..."
-                                className="flex-grow bg-transparent focus:border-transparent focus:outline-none"
-                            />
+                            <div className="relative flex-grow">
+                                <input
+                                    type="text"
+                                    value={userInput}
+                                    onChange={e => setUserInput(e.target.value)}
+                                    className="w-full bg-transparent focus:border-transparent focus:outline-none caret-transparent flex-grow"
+                                    autoFocus
+                                />
+                                <div
+                                    className="absolute bg-white pointer-events-none"
+                                    style={{
+                                        height: '1.2em',
+                                        width: '0.6em',
+                                        left: `${userInput.length}ch`,
+                                        top: '0.2em',
+                                    }}
+                                ></div>
+                            </div>
                         </div>
                     </form>
                 </div>
