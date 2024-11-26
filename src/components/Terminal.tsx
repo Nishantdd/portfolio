@@ -1,16 +1,34 @@
-'use client'
+'use client';
 import query from '@/types/query';
 import Prompt from './Prompt';
-import { useState } from 'react'
+import { parser } from '@/utils/commandParser';
+import React, { useState } from 'react';
 
 function Terminal() {
-    const [userInput, setUserInput] = useState("");
-    const [prevQueries, setPrevQueries] = useState<query[]>([{command: "echo hello", output: "hello"}]);
+    const [userInput, setUserInput] = useState('');
+    const [prevQueries, setPrevQueries] = useState<query[]>([{ command: 'echo hello', output: 'hello' }]);
+
+    const handleCommand = async (e: React.FormEvent) => {
+        e.preventDefault();
+        const command = userInput;
+        const output = await parser(command);
+
+        setPrevQueries(prev => [
+            ...prev,
+            {
+                command,
+                output
+            }
+        ]);
+
+        setUserInput('');
+    };
+
     return (
-        <div className='h-screen w-screen p-2 font-ibm-mono'>
-            <div className='p-8 w-full h-full rounded-xl border-white border-2'>
-                <div className='flex flex-col'>
-                    <div className='ml-2 mb-8'>
+        <div className="h-screen w-screen p-2 font-ibm-mono">
+            <div className="h-full w-full rounded-xl border-2 border-white p-8">
+                <div className="flex flex-col">
+                    <div className="mb-8 ml-2">
                         <pre>
                             {`___       __    ______                            
 __ |     / /_______  /__________________ ________ 
@@ -19,27 +37,48 @@ __ |/ |/ / /  __/  / / /__ / /_/ /  / / / / /  __/
 ____/|__/  \\___//_/  \\___/ \\____//_/ /_/ /_/\\___/
 `}
                         </pre>
-                        <div className="flex flex-col mt-4">
+                        <div className="mt-4 flex flex-col">
                             <p>Type 'help' to see the list of available commands</p>
                             <p>Type 'fetch' to display summary</p>
-                            <p>Type 'resume' or click <a href='drive.google.com' className='underline'>here</a> to view resume</p>
+                            <p>
+                                {"Type 'resume' or click "}
+                                <a
+                                    href="https://drive.google.com/file/d/1e-aZEhiXeUC6Nnr8HvIF0VjaSw2v1zjo/view?usp=sharing"
+                                    target="_blank"
+                                    className="underline">
+                                    here
+                                </a>
+                                {' to view resume'}
+                            </p>
                         </div>
                     </div>
-                    <div className='flex flex-col justify-start gap-2'>
+                    <div className="flex flex-col justify-start gap-2">
                         {prevQueries.map((query, index) => (
                             <div key={index}>
-                                <div className='flex flex-row space-x-2'>
+                                <div className="flex flex-row space-x-2">
                                     <Prompt />
-                                    <div className='flex-grow'>{query.command}</div>
+                                    <div className="flex-grow">{query.command}</div>
                                 </div>
-                                <p className='whitespace-pre-wrap'>{query.output}</p>
+                                <p className="whitespace-pre-wrap">{query.output}</p>
                             </div>
                         ))}
                     </div>
+                    <form onSubmit={handleCommand}>
+                        <div className="mt-2 flex flex-row space-x-2">
+                            <Prompt />
+                            <input
+                                type="text"
+                                value={userInput}
+                                onChange={e => setUserInput(e.target.value)}
+                                placeholder="Start typing a command..."
+                                className="flex-grow bg-transparent focus:border-transparent focus:outline-none"
+                            />
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
-export default Terminal
+export default Terminal;
