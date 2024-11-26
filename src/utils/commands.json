@@ -7,7 +7,7 @@
     "whoami": "guest",
     "vi": "woah, you still use 'vi'? just try 'vim'.",
     "vim": "'vim' is so outdated. how about 'nvim'?",
-    "email": "nishant.dahiya2000@gmail.com",
     "ls": "./a\n./bunch\n./of\n./fake\n./directories",
-    "cd": "no peeking :/"
+    "cd": "no peeking :/",
+    "pwd": "Ocean_Cables/Internet/Vercel/Portfolio/Nishant"
 }

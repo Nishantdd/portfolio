@@ -26,7 +26,7 @@ function Terminal() {
     };
 
     useKeyboardShortcuts((event: KeyboardEvent) => {
-        if(event.ctrlKey && event.key === 'l'){
+        if (event.ctrlKey && event.key === 'l') {
             setPrevQueries([]);
             event.preventDefault();
         } else if (event.key === 'Tab') {
@@ -38,7 +38,7 @@ function Terminal() {
 
     return (
         <div className="h-screen w-screen p-2 font-ibm-mono">
-            <div className="h-full w-full rounded-xl border-2 border-white p-8 overflow-y-auto">
+            <div className="h-full w-full overflow-y-auto rounded-xl border-2 border-white p-8">
                 <div className="flex flex-col">
                     <div className="mb-8 ml-2">
                         <pre>
@@ -64,7 +64,7 @@ ____/|__/  \\___//_/  \\___/ \\____//_/ /_/ /_/\\___/
                             </p>
                         </div>
                     </div>
-                    <div className={`${prevQueries.length > 0 && "mt-2"} flex flex-col gap-2`}>
+                    <div className={`${prevQueries.length > 0 && 'mt-2'} flex flex-col gap-2`}>
                         {prevQueries.map((query, index) => (
                             <div key={index}>
                                 <div className="flex flex-row space-x-2">
@@ -75,7 +75,7 @@ ____/|__/  \\___//_/  \\___/ \\____//_/ /_/ /_/\\___/
                             </div>
                         ))}
                     </div>
-                    <form onSubmit={handleCommand} className='mt-2'>
+                    <form onSubmit={handleCommand} className="mt-2">
                         <div className="flex flex-row space-x-2">
                             <Prompt />
                             <div className="relative flex-grow">
@@ -83,18 +83,17 @@ ____/|__/  \\___//_/  \\___/ \\____//_/ /_/ /_/\\___/
                                     type="text"
                                     value={userInput}
                                     onChange={e => setUserInput(e.target.value)}
-                                    className="w-full bg-transparent focus:border-transparent focus:outline-none caret-transparent flex-grow"
+                                    className="w-full flex-grow bg-transparent caret-transparent focus:border-transparent focus:outline-none"
                                     autoFocus
                                 />
                                 <div
-                                    className="absolute bg-white pointer-events-none"
+                                    className="pointer-events-none absolute bg-white"
                                     style={{
                                         height: '1.2em',
                                         width: '0.6em',
                                         left: `${userInput.length}ch`,
-                                        top: '0.2em',
-                                    }}
-                                ></div>
+                                        top: '0.2em'
+                                    }}></div>
                             </div>
                         </div>
                     </form>
