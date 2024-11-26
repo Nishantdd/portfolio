@@ -23,15 +23,15 @@ function Home() {
         if (animationStage === 1) {
             const messageTimers = [
                 setTimeout(() => setCurrentMessage(1), 700),
-                setTimeout(() => setCurrentMessage(2), 1400),
-                setTimeout(() => setAnimationStage(2), 2000)
+                setTimeout(() => setCurrentMessage(2), 1500),
+                setTimeout(() => setAnimationStage(2), 2500)
             ];
             return () => messageTimers.forEach(timer => clearTimeout(timer));
         }
     }, [animationStage]);
 
     return (
-        <div className={styles.container}>
+        <div className="w-full h-[100vh] bg-[#181818] color-[#d4d4d4] flex justify-center items-center relative">
             <div className={`${styles.terminal} ${animationStage >= 2 && styles.fadeOut}`}>
                 <div className={styles.prompt}>
                     <span className={styles.dollarSign}>$ </span>
@@ -43,7 +43,7 @@ function Home() {
                     </div>
                 )}
             </div>
-            <div className={`${styles.content} ${animationStage >= 2 && styles.showContent}`}>
+            <div className={`${animationStage >= 2 ? styles.showContent : styles.content}`}>
                 <Terminal />
             </div>
         </div>
