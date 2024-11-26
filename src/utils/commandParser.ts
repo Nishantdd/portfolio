@@ -1,23 +1,27 @@
+import responses from './commands.json';
+
 const getTokens = (s: string) : string[] => {
     if(s.length === 0) return [''];
     return s.trim().split(' ');
 }
 
+const resolve = (res: any) => Promise.resolve(res);
+
 const parser = async (query: string): Promise<string> => {
+    if(query.length === 0) return Promise.resolve('');
     const tokens = getTokens(query);
-    if(tokens.length === 0) return Promise.resolve('');
     
     const ctx = {
         command: tokens[0],
         parameters: tokens.slice(1)
     }
 
-    switch(ctx.command){
-        case 'about':
-            return `Hi, I am Nishant.\nWelcome to my terminal styled portfolio website!\nMore about me:\n'fetch' - short summary\n'resume' - my latest resume\n'readme' - my github readme`
+    const availableCommands: string[] = Object.keys(responses);
+    if(availableCommands.find(value => value === ctx.command)){
+        return resolve(responses[ctx.command as keyof typeof responses]);
+    } else {
+        return resolve(`shell: command not found: ${ctx.command}. Try 'help' to get started.`)
     }
-    
-    return Promise.resolve("");
 };
 
 export { parser };

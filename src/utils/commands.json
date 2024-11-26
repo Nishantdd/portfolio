@@ -1,0 +1,13 @@
+{
+    "about": "Hi, I am Nishant.\nWelcome to my terminal styled portfolio website!\nMore about me:\n'fetch' - short summary\n'resume' - my latest resume\n'readme' - my github readme",
+    "banner": "___       __    ______\n__ |     / /_______  /__________________ ________\n__ | /| / /_  _ \\_  /_  ___/  __ \\_  __ \\`__ \\  _ \\\n__ |/ |/ / /  __/  / / /__ / /_/ /  / / / / /  __/\n____/|__/  \\___//_/  \\___/ \\____//_/ /_/ /_/\\___/\nType 'help' to see the list of available commands\nType 'fetch' to display summary\nType 'resume' to view resume",
+    "nvim": "'nvim'? too fancy. why not 'emacs'?",
+    "emacs": "you know what? just use vscode.",
+    "help": "Welcome! Here are all the available commands: \n \nabout banner cd date donate echo emacs \nemail github gui help linkedin ls nvim \nprojects quote readme resume sudo sumfetch theme \nvi vim weather whoami \n \n[tab]: trigger completion. \n[ctrl+l]/clear: clear terminal. \n \nType 'fetch' to display summary.",
+    "whoami": "guest",
+    "vi": "woah, you still use 'vi'? just try 'vim'.",
+    "vim": "'vim' is so outdated. how about 'nvim'?",
+    "email": "nishant.dahiya2000@gmail.com",
+    "ls": "./a\n./bunch\n./of\n./fake\n./directories",
+    "cd": "no peeking :/"
+}
