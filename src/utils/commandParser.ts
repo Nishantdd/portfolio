@@ -5,7 +5,7 @@ const getTokens = (s: string): string[] => {
     return s.trim().split(' ');
 };
 
-const resolve = (res: any) => Promise.resolve(res);
+const resolve = (res: string) => Promise.resolve(res);
 
 const parser = async (query: string): Promise<string> => {
     if (query.length === 0) return Promise.resolve('');

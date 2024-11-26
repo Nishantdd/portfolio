@@ -14,6 +14,7 @@ const geistMono = localFont({
     weight: '100 900'
 });
 const ibmMono = IBM_Plex_Mono({
+    subsets: ['latin'],
     variable: '--font-ibm-mono',
     weight: ['100', '200', '300', '400', '500']
 });
