@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 
 function Terminal() {
     const [userInput, setUserInput] = useState('');
-    const [prevQueries, setPrevQueries] = useState<query[]>([{ command: 'echo hello', output: 'hello' }]);
+    const [prevQueries, setPrevQueries] = useState<query[]>([]);
 
     const handleCommand = async (e: React.FormEvent) => {
         e.preventDefault();
