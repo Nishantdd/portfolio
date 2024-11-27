@@ -12,16 +12,18 @@ function Terminal() {
     const handleCommand = async (e: React.FormEvent) => {
         e.preventDefault();
         const command = userInput;
-        const output = await parser(command);
-
-        setPrevQueries(prev => [
-            ...prev,
-            {
-                command,
-                output
-            }
-        ]);
-
+        if(command === 'clear'){
+            setPrevQueries([]);
+        } else {
+            const output = await parser(command);
+            setPrevQueries(prev => [
+                ...prev,
+                {
+                    command,
+                    output
+                }
+            ]);
+        }
         setUserInput('');
     };
 

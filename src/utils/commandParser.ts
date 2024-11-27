@@ -19,6 +19,8 @@ const parser = async (query: string): Promise<string> => {
     const availableCommands: string[] = Object.keys(responses);
     if (availableCommands.find(value => value === ctx.command)) {
         return resolve(responses[ctx.command as keyof typeof responses]);
+    } else if (ctx.command === 'echo') {
+        return resolve(ctx.parameters.join(' '));
     } else if (ctx.command === 'resume') {
         window.open('https://drive.google.com/file/d/1e-aZEhiXeUC6Nnr8HvIF0VjaSw2v1zjo/view?usp=sharing', '_blank');
         return resolve('Opening resume in new tab...');
