@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Head from 'next/head';
 import localFont from 'next/font/local';
 import { IBM_Plex_Mono } from 'next/font/google';
 import './globals.css';

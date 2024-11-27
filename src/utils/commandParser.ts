@@ -7,6 +7,18 @@ const getTokens = (s: string): string[] => {
 
 const resolve = (res: string) => Promise.resolve(res);
 
+const getCompletion = (query: string): Promise<string> => {
+    const availableCommands = ['about', 'banner', 'cd', 'date', 'echo', 'emacs', 'email', 'exit', 'fetch', 'github', 'help', 'linkedin', 'ls', 'nvim', 'projects', 'pwd', 'quote', 'readme', 'resume', 'sudo', 'vi', 'vim', 'weather', 'whoami'];
+
+    for(let command of availableCommands){
+        if(command.startsWith(query)){
+            return resolve(command);
+        }
+    }
+
+    return resolve(query);
+};
+
 const parser = async (query: string): Promise<string> => {
     if (query.length === 0) return Promise.resolve('');
     const tokens = getTokens(query);
@@ -38,11 +50,11 @@ const parser = async (query: string): Promise<string> => {
         return resolve('Opening linkedin in new tab...');
     } else if (ctx.command === 'quote') {
         const res = await fetch('/api/quotes');
-        const { quote, author } : { quote: string, author: string } = await res.json();
-        return resolve(`${quote}\n -${author}`)
+        const { quote, author }: { quote: string; author: string } = await res.json();
+        return resolve(`${quote}\n -${author}`);
     } else {
         return resolve(`shell: command not found: ${ctx.command}. Try 'help' to get started.`);
     }
 };
 
-export { parser };
+export { parser, getCompletion };

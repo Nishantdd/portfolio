@@ -2,7 +2,7 @@
 import query from '@/types/query';
 import Prompt from './Prompt';
 import useKeyboardShortcuts from '@/app/hooks/useKeyboardShortcuts';
-import { parser } from '@/utils/commandParser';
+import { parser, getCompletion } from '@/utils/commandParser';
 import React, { useRef, useState } from 'react';
 
 function Terminal() {
@@ -29,13 +29,12 @@ function Terminal() {
         setUserInput('');
     };
 
-    useKeyboardShortcuts((event: KeyboardEvent) => {
+    useKeyboardShortcuts(async (event: KeyboardEvent) => {
         if (event.ctrlKey && event.key === 'l') {
             setPrevQueries([]);
             event.preventDefault();
         } else if (event.key === 'Tab') {
-            // TODO: Get completions from commandParser api
-            setUserInput('help');
+            setUserInput(await getCompletion(userInput));
             event.preventDefault();
         } else {
             inputRef.current?.focus();
@@ -81,7 +80,7 @@ ____/|__/  \\___//_/  \\___/ \\____//_/ /_/ /_/\\___/
                             </div>
                         ))}
                     </div>
-                    <form onSubmit={handleCommand} className="mt-2" id='prompt'>
+                    <form onSubmit={handleCommand} className="mt-2" id="prompt">
                         <div className="flex flex-row space-x-2">
                             <Prompt />
                             <div className="relative flex-grow">
@@ -94,7 +93,7 @@ ____/|__/  \\___//_/  \\___/ \\____//_/ /_/ /_/\\___/
                                     autoFocus
                                 />
                                 <div
-                                    id='caret'
+                                    id="caret"
                                     className="pointer-events-none absolute bg-white"
                                     style={{
                                         height: '1.2em',
