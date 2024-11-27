@@ -37,6 +37,8 @@ function Terminal() {
             // TODO: Get completions from commandParser api
             setUserInput('help');
             event.preventDefault();
+        } else {
+            inputRef.current?.focus();
         }
     });
 
