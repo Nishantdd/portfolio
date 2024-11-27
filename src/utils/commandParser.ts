@@ -36,6 +36,10 @@ const parser = async (query: string): Promise<string> => {
     } else if (ctx.command === 'linkedin') {
         window.open('https://www.linkedin.com/in/nishant-dahiya-322038232/', '_blank');
         return resolve('Opening linkedin in new tab...');
+    } else if (ctx.command === 'quote') {
+        const res = await fetch('/api/quotes');
+        const { quote, author } : { quote: string, author: string } = await res.json();
+        return resolve(`${quote}\n -${author}`)
     } else {
         return resolve(`shell: command not found: ${ctx.command}. Try 'help' to get started.`);
     }
