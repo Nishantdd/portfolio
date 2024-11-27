@@ -2,7 +2,7 @@
 import query from '@/types/query';
 import Prompt from './Prompt';
 import useKeyboardShortcuts from '@/app/hooks/useKeyboardShortcuts';
-import { parser } from '@/utils/commandParser';
+import { parser, handleExit } from '@/utils/commandParser';
 import React, { useState } from 'react';
 
 function Terminal() {
@@ -14,6 +14,8 @@ function Terminal() {
         const command = userInput;
         if(command === 'clear'){
             setPrevQueries([]);
+        } else if (command === 'exit') {
+            handleExit();
         } else {
             const output = await parser(command);
             setPrevQueries(prev => [
@@ -77,7 +79,7 @@ ____/|__/  \\___//_/  \\___/ \\____//_/ /_/ /_/\\___/
                             </div>
                         ))}
                     </div>
-                    <form onSubmit={handleCommand} className="mt-2">
+                    <form onSubmit={handleCommand} className="mt-2" id='prompt'>
                         <div className="flex flex-row space-x-2">
                             <Prompt />
                             <div className="relative flex-grow">
@@ -89,6 +91,7 @@ ____/|__/  \\___//_/  \\___/ \\____//_/ /_/ /_/\\___/
                                     autoFocus
                                 />
                                 <div
+                                    id='caret'
                                     className="pointer-events-none absolute bg-white"
                                     style={{
                                         height: '1.2em',
@@ -98,7 +101,7 @@ ____/|__/  \\___//_/  \\___/ \\____//_/ /_/ /_/\\___/
                                     }}></div>
                             </div>
                         </div>
-                        {/* TODO: Implement a Loader for parser */}|
+                        {/* TODO: Implement a Loader for parser */}
                     </form>
                 </div>
             </div>

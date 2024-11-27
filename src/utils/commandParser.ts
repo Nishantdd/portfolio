@@ -7,6 +7,17 @@ const getTokens = (s: string): string[] => {
 
 const resolve = (res: string) => Promise.resolve(res);
 
+const handleExit = () => {
+    const p = document.createElement('p');
+    setTimeout(() => window.close(), 1000);
+    setTimeout(() => p.innerHTML += "Connection to 127.0.0.1 closed.", 200);
+    setTimeout(() => p.innerHTML = 'logout<br>', 150);
+    const caret = document.querySelector('#caret');
+    caret?.classList.add('hidden');
+    const prompt = document.querySelector('#prompt');
+    prompt?.appendChild(p);
+}
+
 const parser = async (query: string): Promise<string> => {
     if (query.length === 0) return Promise.resolve('');
     const tokens = getTokens(query);
@@ -45,4 +56,4 @@ const parser = async (query: string): Promise<string> => {
     }
 };
 
-export { parser };
+export { parser, handleExit };
