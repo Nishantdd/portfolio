@@ -98,6 +98,7 @@ ____/|__/  \\___//_/  \\___/ \\____//_/ /_/ /_/\\___/
                                     }}></div>
                             </div>
                         </div>
+                        {/* TODO: Implement a Loader for parser */}|
                     </form>
                 </div>
             </div>
