@@ -2,20 +2,20 @@
 import query from '@/types/query';
 import Prompt from './Prompt';
 import useKeyboardShortcuts from '@/app/hooks/useKeyboardShortcuts';
-import { parser, handleExit } from '@/utils/commandParser';
-import React, { useState } from 'react';
+import { parser } from '@/utils/commandParser';
+import React, { useRef, useState } from 'react';
 
 function Terminal() {
     const [userInput, setUserInput] = useState('');
+    const inputRef = useRef<HTMLInputElement>(null);
     const [prevQueries, setPrevQueries] = useState<query[]>([]);
 
     const handleCommand = async (e: React.FormEvent) => {
         e.preventDefault();
+        inputRef.current?.scrollIntoView({ behavior: 'smooth' });
         const command = userInput;
-        if(command === 'clear'){
+        if (command === 'clear') {
             setPrevQueries([]);
-        } else if (command === 'exit') {
-            handleExit();
         } else {
             const output = await parser(command);
             setPrevQueries(prev => [
@@ -85,6 +85,7 @@ ____/|__/  \\___//_/  \\___/ \\____//_/ /_/ /_/\\___/
                             <div className="relative flex-grow">
                                 <input
                                     type="text"
+                                    ref={inputRef}
                                     value={userInput}
                                     onChange={e => setUserInput(e.target.value)}
                                     className="w-full flex-grow bg-transparent caret-transparent focus:border-transparent focus:outline-none"
