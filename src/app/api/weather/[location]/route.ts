@@ -3,7 +3,7 @@ export async function GET(
     {
         params
     }: {
-        params: { location: string };
+        params: Promise<{ location: string }>;
     }
 ): Promise<Response> {
     try {
