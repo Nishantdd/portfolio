@@ -7,8 +7,8 @@ import React, { useRef, useState } from 'react';
 
 function Terminal() {
     const [userInput, setUserInput] = useState('');
-    const inputRef = useRef<HTMLInputElement>(null);
     const [prevQueries, setPrevQueries] = useState<query[]>([]);
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const handleCommand = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -30,14 +30,16 @@ function Terminal() {
     };
 
     useKeyboardShortcuts(async (event: KeyboardEvent) => {
-        event.preventDefault();
         if (event.ctrlKey && event.key === 'l') {
             setPrevQueries([]);
+            event.preventDefault();
         } else if (event.key === 'Tab') {
             setUserInput(await getCompletion(userInput));
+            event.preventDefault();
         } else if (event.key === 'ArrowUp') {
             const len = prevQueries.length;
             len > 0 && setUserInput(prevQueries[len - 1].command);
+            event.preventDefault();
         } else {
             inputRef.current?.focus();
         }
