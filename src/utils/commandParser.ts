@@ -8,10 +8,35 @@ const getTokens = (s: string): string[] => {
 const resolve = (res: string) => Promise.resolve(res);
 
 const getCompletion = (query: string): Promise<string> => {
-    const availableCommands = ['about', 'banner', 'cd', 'date', 'echo', 'emacs', 'email', 'exit', 'fetch', 'github', 'help', 'linkedin', 'ls', 'nvim', 'projects', 'pwd', 'quote', 'readme', 'resume', 'sudo', 'vi', 'vim', 'weather', 'whoami'];
+    const availableCommands = [
+        'about',
+        'banner',
+        'cd',
+        'date',
+        'echo',
+        'emacs',
+        'email',
+        'exit',
+        'fetch',
+        'github',
+        'help',
+        'linkedin',
+        'ls',
+        'nvim',
+        'projects',
+        'pwd',
+        'quote',
+        'readme',
+        'resume',
+        'sudo',
+        'vi',
+        'vim',
+        'weather',
+        'whoami'
+    ];
 
-    for(let command of availableCommands){
-        if(command.startsWith(query)){
+    for (let command of availableCommands) {
+        if (command.startsWith(query)) {
             return resolve(command);
         }
     }
@@ -52,6 +77,15 @@ const parser = async (query: string): Promise<string> => {
         const res = await fetch('/api/quotes');
         const { quote, author }: { quote: string; author: string } = await res.json();
         return resolve(`${quote}\n -${author}`);
+    } else if (ctx.command === 'weather') {
+        if (ctx.parameters.length === 0) {
+            return resolve('Usage: weather [location_name]\nExample: weather Oymyakon');
+        } else {
+            const res = await fetch(`/api/weather/${ctx.parameters.join('+')}`);
+            const { weather } = await res.json();
+            console.log(weather);
+            return resolve(weather);
+        }
     } else {
         return resolve(`shell: command not found: ${ctx.command}. Try 'help' to get started.`);
     }

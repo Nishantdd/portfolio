@@ -76,7 +76,10 @@ ____/|__/  \\___//_/  \\___/ \\____//_/ /_/ /_/\\___/
                                     <Prompt />
                                     <div className="flex-grow">{query.command}</div>
                                 </div>
-                                <p className="whitespace-pre-wrap">{query.output}</p>
+                                <div
+                                    dangerouslySetInnerHTML={{ __html: query.output }}
+                                    className="whitespace-pre-wrap"
+                                />
                             </div>
                         ))}
                     </div>
