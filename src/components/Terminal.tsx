@@ -30,12 +30,14 @@ function Terminal() {
     };
 
     useKeyboardShortcuts(async (event: KeyboardEvent) => {
+        event.preventDefault();
         if (event.ctrlKey && event.key === 'l') {
             setPrevQueries([]);
-            event.preventDefault();
         } else if (event.key === 'Tab') {
             setUserInput(await getCompletion(userInput));
-            event.preventDefault();
+        } else if (event.key === 'ArrowUp') {
+            const len = prevQueries.length;
+            len > 0 && setUserInput(prevQueries[len - 1].command);
         } else {
             inputRef.current?.focus();
         }
