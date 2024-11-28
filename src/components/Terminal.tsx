@@ -3,16 +3,19 @@ import query from '@/types/query';
 import Prompt from './Prompt';
 import useKeyboardShortcuts from '@/app/hooks/useKeyboardShortcuts';
 import { parser, getCompletion } from '@/utils/commandParser';
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 
 function Terminal() {
     const [userInput, setUserInput] = useState('');
     const [prevQueries, setPrevQueries] = useState<query[]>([]);
     const inputRef = useRef<HTMLInputElement>(null);
 
+    useEffect(() => {
+        inputRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }, [prevQueries]);
+
     const handleCommand = async (e: React.FormEvent) => {
         e.preventDefault();
-        inputRef.current?.scrollIntoView({ behavior: 'smooth' });
         const command = userInput;
         if (command === 'clear') {
             setPrevQueries([]);
