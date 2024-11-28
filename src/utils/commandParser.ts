@@ -8,32 +8,8 @@ const getTokens = (s: string): string[] => {
 const resolve = (res: string) => Promise.resolve(res);
 
 const getCompletion = (query: string): Promise<string> => {
-    const availableCommands = [
-        'about',
-        'banner',
-        'cd',
-        'date',
-        'echo',
-        'emacs',
-        'email',
-        'exit',
-        'fetch',
-        'github',
-        'help',
-        'linkedin',
-        'ls',
-        'nvim',
-        'projects',
-        'pwd',
-        'quote',
-        'readme',
-        'resume',
-        'sudo',
-        'vi',
-        'vim',
-        'weather',
-        'whoami'
-    ];
+    // prettier-ignore
+    const availableCommands = [ 'about', 'banner', 'cd', 'date', 'echo', 'emacs', 'email', 'exit', 'fetch', 'github', 'help', 'linkedin', 'ls', 'nvim', 'projects', 'pwd', 'quote', 'readme', 'resume', 'sudo', 'vi', 'vim', 'weather', 'whoami' ];
 
     for (let command of availableCommands) {
         if (command.startsWith(query)) {
