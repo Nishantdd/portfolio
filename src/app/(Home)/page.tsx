@@ -5,7 +5,7 @@ import Terminal from '@/components/Terminal';
 
 function Home() {
     const [text, setText] = useState('');
-    const [animationStage, setAnimationStage] = useState(2);
+    const [animationStage, setAnimationStage] = useState(0);
     const [currentMessage, setCurrentMessage] = useState(0);
     const command = 'ssh nishant@127.0.0.1';
     const messages = ['Authenticating...', 'Access granted..', 'Initializing connection...'];
