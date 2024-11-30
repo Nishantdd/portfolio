@@ -43,8 +43,19 @@ function Terminal() {
             setUserInput(await getCompletion(userInput));
             event.preventDefault();
         } else if (event.key === 'ArrowUp') {
-            historyIndex >= 0 && setUserInput(prevQueries[historyIndex].command);
-            setHistoryIndex(historyIndex - 1);
+            if(historyIndex >= 0){
+                setUserInput(prevQueries[historyIndex].command);
+                historyIndex > 0 && setHistoryIndex(historyIndex - 1);
+            }
+            event.preventDefault();
+        } else if (event.key === 'ArrowDown') {
+            const len = prevQueries.length;
+            if(len > 1 && historyIndex < len - 1){
+                setUserInput(prevQueries[historyIndex + 1].command);
+                setHistoryIndex(historyIndex + 1);
+            } else if (historyIndex === len - 1){
+                setUserInput('');
+            }
             event.preventDefault();
         } else {
             inputRef.current?.focus();
