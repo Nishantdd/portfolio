@@ -8,10 +8,13 @@ import React, { useRef, useState, useEffect } from 'react';
 function Terminal() {
     const [userInput, setUserInput] = useState('');
     const [prevQueries, setPrevQueries] = useState<query[]>([]);
+    const [historyIndex, setHistoryIndex] = useState(-1);
     const inputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
         inputRef.current?.scrollIntoView({ behavior: 'smooth' });
+        const len = prevQueries.length;
+        setHistoryIndex(len - 1);
     }, [prevQueries]);
 
     const handleCommand = async (e: React.FormEvent) => {
@@ -40,8 +43,8 @@ function Terminal() {
             setUserInput(await getCompletion(userInput));
             event.preventDefault();
         } else if (event.key === 'ArrowUp') {
-            const len = prevQueries.length;
-            len > 0 && setUserInput(prevQueries[len - 1].command);
+            historyIndex >= 0 && setUserInput(prevQueries[historyIndex].command);
+            setHistoryIndex(historyIndex - 1);
             event.preventDefault();
         } else {
             inputRef.current?.focus();
