@@ -20,7 +20,7 @@ const ibmMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-    title: 'Terminal Port',
+    title: 'Terminal = Nishant',
     description: 'My terminal styled portfolio',
     icons: './favicon.ico'
 };
