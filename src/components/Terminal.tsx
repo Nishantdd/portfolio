@@ -39,6 +39,10 @@ function Terminal() {
         if (event.ctrlKey && event.key === 'l') {
             setPrevQueries([]);
             event.preventDefault();
+        } else if(event.ctrlKey && event.key === 'c') {
+            const len = prevQueries.length;
+            setUserInput('');
+            setHistoryIndex(len - 1);
         } else if (event.key === 'Tab') {
             setUserInput(await getCompletion(userInput));
             event.preventDefault();
